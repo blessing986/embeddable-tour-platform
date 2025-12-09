@@ -1,29 +1,31 @@
 import "./App.css";
 import { initOnboard } from "./widget-entry";
 
+// TODO: Fetch steps from server
+// TODO: Add target functionality
 
 function App() {
 
-  // useEffect(() => {
-    // Example steps for development preview
-    const steps = [
-      { id: "s1", target: "#logo", content: "Welcome!" },
-      { id: "s2", target: "#btn", content: "Click this button." },
-      { id: "s3", content: "You're almost done." },
-      { id: "s4", content: "Bye!" }
-    ];
-
-    // Start the widget automatically in DEV
     const widget = initOnboard({ 
       tourId: "demo", 
-      steps,
+      userId: "user-123",
       resume: true,
+      styles: {
+        tooltip: {
+        color: '#fff',
+        background: 'linear-gradient(145deg, #ff7eb9, #ff758c, #ffafbd, #ffc3a0)',
+        boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35), 0 0 12px rgba(255, 200, 255, 0.6)',
+        backdropFilter: 'blur(6px)',
+        border: '1px solid rgba(255, 255, 255, 0.3)',
+        textShadow: '0 1px 2px rgba(0,0,0,0.2)',
+        transition: 'opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease',
+      },
+      button: {
+        backgroundColor: 'red'
+      },
+      },
       onEvent: console.log
     });
-
-    
-
-  // }, []);
 
   return (
     <div className="card" style={{ padding: 40 }}>

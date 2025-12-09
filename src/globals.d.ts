@@ -1,6 +1,6 @@
-declare global {
-  interface Window {
-    OnboardWidget: any; // or the actual type
+declare global {interface Window {
+    initOnboard?: (cfg: OnboardConfig) => ReturnType<typeof createWidget> | null;
+    OnboardWidget: ReturnType<typeof createWidget> | null;
   }
 }
 
