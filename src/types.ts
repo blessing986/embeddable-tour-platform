@@ -1,5 +1,6 @@
     export type Step = {
     id: string;
+    title?: string;
     target?: string;
     content: string;
     position?: "top"|"bottom"|"left"|"right"|"center";
