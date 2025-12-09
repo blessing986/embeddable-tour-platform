@@ -4,6 +4,7 @@
     target?: string;
     content: string;
     position?: "top"|"bottom"|"left"|"right"|"center";
+    step_viewed: number;
     };
 
     export type OnboardConfig = {
