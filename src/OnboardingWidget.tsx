@@ -1,49 +1,23 @@
-// import { useState } from "react"
-// import { Tooltip } from "../components/Tooltip"
-
-const steps = [
-        { id: 's1', target: '#logo', content: 'Welcome to the site!' },
-        { id: 's2', content: 'We will show you around.', target: '#startDemo' },
-        { id: 's3', content: 'You can skip anytime.', target: '#pickMe' },
-        { id: 's4', content: 'Resume is supported.',target: '#logo', },
-        { id: 's5', content: 'Done — thanks!' }
-    ];
-
-//     // fetch this from the api
-
-// function OnboardingWidget() {
-//     const [step, setStep] = useState(0)
-//     console.log(step);
-    
-//   return (
-//         <Tooltip 
-//         step={{content: steps[step].content}} 
-//         index={step} 
-//         total={steps.length}
-//         onNext={() => setStep(step + 1)}
-//         onBack={() => setStep(step - 1)}
-//         onSkip={() => setStep(steps.length - 1)}
-//         />
-//   )
-// }
-
-// export default OnboardingWidget
-
 import { useState, useEffect } from "react";
 import { Tooltip } from "./tooltip";
+import type { Step, TooltipStyles } from "./types";
 
 interface Props {
   startIndex: number;
   fireEvent: (event: string) => void;
   onChange: (index: number) => void;
   onEnd: () => void;
+  steps: Step[]
+  styles?:  TooltipStyles 
 }
 
 export default function OnboardingWidget({
+steps,
   startIndex,
   fireEvent,
   onChange,
   onEnd,
+  styles
 }: Props) {
   const [step, setStep] = useState(startIndex);
 
@@ -60,7 +34,7 @@ export default function OnboardingWidget({
 
   return (
     <Tooltip
-      step={{ content: current.content }}
+      step={current}
       index={step}
       total={steps.length}
       onNext={() => {
@@ -75,6 +49,7 @@ export default function OnboardingWidget({
         fireEvent("skipped");
         setStep(steps.length - 1);
       }}
+      styles={styles}
     />
   );
 }
