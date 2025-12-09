@@ -34,7 +34,7 @@ steps,
 
   return (
     <Tooltip
-      step={{ content: current.content }}
+      step={current}
       index={step}
       total={steps.length}
       onNext={() => {

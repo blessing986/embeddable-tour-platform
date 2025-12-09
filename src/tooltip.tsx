@@ -1,5 +1,5 @@
 import { defaultTooltipStyles } from "./constant";
-import type { TooltipStyles } from "./types";
+import type { Step, TooltipStyles } from "./types";
 
 export const Tooltip = ({
     step, 
@@ -10,7 +10,7 @@ export const Tooltip = ({
     onSkip,
     styles
 }: {
-        step: any, 
+        step: Step, 
         index: number, 
         total: number,
         onNext: () => void,
@@ -26,9 +26,31 @@ export const Tooltip = ({
     progress: { ...defaultTooltipStyles.progress, ...styles?.progress },
   };
 
+  //  position logic (basic): if target exists, try to scroll into view and anchor tooltip near center
+  
+    let targetRect = null;
+    if (step.target) {
+      const el = document.querySelector(step.target);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+        targetRect = el.getBoundingClientRect();
+        console.log(targetRect, step.target);
+      }
+    }
+
+    
+
   return (
     <>
-    <div style={mergedStyles.tooltip} className="tooltip show">
+    <div className="tooltip show" style={{
+      ...mergedStyles.tooltip, 
+      ...(targetRect
+      ? {
+          left: `${targetRect.left + targetRect.width / 2}px`,
+          top: `${targetRect.bottom + 10 + window.scrollY}px`,
+          transform: 'translateX(-50%)',
+        }
+      : {}),}}>
       <div className="content">{step.content}</div>
       <div style={mergedStyles.progress} className="progress">
         Step {index + 1} of {total}

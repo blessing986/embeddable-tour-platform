@@ -2,7 +2,7 @@ import "./App.css";
 import { initOnboard } from "./widget-entry";
 
 // TODO: Fetch steps from server
-// TODO: Add target functionality
+// TODO: Add target functionality ___DONE
 
 function App() {
 
@@ -28,7 +28,7 @@ function App() {
     });
 
   return (
-    <div className="card" style={{ padding: 40 }}>
+    <div className="card" id="card" style={{ padding: 40 }}>
       <h1 className="logo" id="logo">Onboarding Widget Preview</h1>
 
       <button 
@@ -40,7 +40,7 @@ function App() {
         Demo Button
       </button>
 
-      <p style={{ marginTop: 20 }}>
+      <p id="text-p" style={{ marginTop: 20 }}>
         This screen exists ONLY for local development.  
         The real widget is embedded externally.
       </p>

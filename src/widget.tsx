@@ -10,9 +10,9 @@ export function createWidget(config: initOnboard) {
   const storeKey = `onboard:${tourId}${userId}:state`;
   const steps = [ //from Server
         { id: 's1', target: '#logo', content: 'Welcome to the site!' },
-        { id: 's2', content: 'We will show you around.', target: '#startDemo' },
-        { id: 's3', content: 'You can skip anytime.', target: '#pickMe' },
-        { id: 's4', content: 'Resume is supported.',target: '#logo', },
+        { id: 's2', content: 'We will show you around.', target: '#card' },
+        { id: 's3', content: 'You can skip anytime.', target: '#btn' },
+        { id: 's4', content: 'Resume is supported.',target: '#text-p', },
         { id: 's5', content: 'Done — thanks!' }
     ];
   const customStyles = config.styles
