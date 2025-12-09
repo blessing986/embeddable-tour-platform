@@ -2,19 +2,22 @@ import type { TooltipStyles } from "./types";
 
 export const defaultTooltipStyles = {
   tooltip: {
-    position: 'fixed' ,
+    position: 'fixed',
     zIndex: 2147483647,
     left: '50%',
     top: '20%',
-    transform: 'translateX(-50%) translateY(0)',
+    // transform: 'translateX(-50%) translateY(0)',
     maxWidth: '320px',
     padding: '12px 16px',
     borderRadius: '12px',
     fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial',
-    background: '#333', 
-    color: '#fff',  
+    background: '#333',
+    color: '#fff',
     boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
-    transition: 'opacity 0.2s ease, transform 0.2s ease',
+    transition:
+      'opacity 0.5s ease, transform 0.5s ease, left 0.5s ease, top 0.5s ease',
+    transform: 'translateX(-50%) translateY(10px)'
+
   },
   controls: {
     display: 'flex',
