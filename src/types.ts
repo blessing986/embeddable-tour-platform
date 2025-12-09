@@ -7,7 +7,7 @@
 
     export type OnboardConfig = {
     steps: Step[];
-    tourId?: string;
+    tourId?: number;
     userId: string;
     resume?: boolean;
     onEvent?: (evt: any) => void;
@@ -16,7 +16,7 @@
     };
 
     export type initOnboard = {
-    tourId?: string;
+    tourId?: number;
     userId: string;
     resume?: boolean;
     onEvent?: (evt: any) => void;
@@ -32,4 +32,13 @@
   progress?: React.CSSProperties;
 } & {
   [key: string]: React.CSSProperties | undefined;
+};
+
+export type Tour = {
+  id: number;                 
+  user_id: string;           
+  name: string;
+  description: string;
+  steps: Step[];       
+  created_at: string; 
 };

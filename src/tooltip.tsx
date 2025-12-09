@@ -42,13 +42,44 @@ export const Tooltip = ({
 
   return (
     <>
-    <div className="tooltip show" style={{
+     <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .onboard-tooltip {
+              opacity: 0;
+              transform: translate(-50%, 20px) scale(0.95);
+              transition:
+                left 0.35s ease,
+                top 0.35s ease;
+              animation: onboardFadeIn 0.35s ease forwards;
+            }
+
+            @keyframes onboardFadeIn {
+              0% {
+                opacity: 0;
+                transform: translate(-50%, 20px) scale(0.9);
+              }
+              60% {
+                opacity: 1;
+                transform: translate(-50%, -4px) scale(1.05);
+              }
+              100% {
+                opacity: 1;
+                transform: translate(-50%, 0) scale(1);
+              }
+            }
+          `
+        }}
+      ></style>
+
+    <div className="onboard-tooltip tooltip show" style={{
       ...mergedStyles.tooltip, 
       ...(targetRect
       ? {
           left: `${targetRect.left + targetRect.width / 2}px`,
           top: `${targetRect.bottom + 10 + window.scrollY}px`,
           transform: 'translateX(-50%)',
+          animation: 'onboardFadeIn 0.35s ease forwards'
         }
       : {}),}}>
       <div className="content">{step.content}</div>
