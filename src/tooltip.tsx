@@ -197,7 +197,7 @@ export const Tooltip = ({
             ...mergedStyles.tooltip,
             position: "absolute",
             transform: "translateX(-50%)",
-            zIndex: 1002,
+            zIndex: 2002,
           }}
         >
           {step.title && (
