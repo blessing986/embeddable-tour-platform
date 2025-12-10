@@ -3,7 +3,7 @@ import type { Step } from "./types";
 
   type Tour = {
     id: number;
-    user_id: string;
+   secret_key: string;
     name: string;
     description: string;
     steps: Step[];
