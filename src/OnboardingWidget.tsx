@@ -9,6 +9,7 @@ interface Props {
   onEnd: () => void;
   steps: Step[]
   styles?:  TooltipStyles 
+  onSkip: (i: number) => void
 }
 
 export default function OnboardingWidget({
@@ -17,6 +18,7 @@ steps,
   fireEvent,
   onChange,
   onEnd,
+  onSkip,
   styles
 }: Props) {
   const [step, setStep] = useState(startIndex);
@@ -45,10 +47,7 @@ steps,
       onBack={() => {
         if (step > 0) setStep(step - 1);
       }}
-      onSkip={() => {
-        fireEvent("skipped");
-        setStep(steps.length - 1);
-      }}
+      onSkip={()=> onSkip(steps.length - 1)}
       styles={styles}
     />
   );
