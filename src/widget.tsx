@@ -46,12 +46,12 @@ export function createWidget(config: initOnboard) {
       currentIndex = i;
       saveState();
 
-    const updatedSteps = steps.map((step, idx) => 
+    steps = steps.map((step, idx) =>
     idx === currentIndex ? { ...step, step_viewed: (step.step_viewed) + 1 } : step
   );
   
       try {
-        const res = await updateTour({steps: updatedSteps, tourId: config.tourId, key: config.secret_key});
+        const res = await updateTour({steps, tourId: config.tourId, key: config.secret_key});
         console.log('triggered', res);
         
       } catch(error) {
