@@ -65,40 +65,6 @@ if (step.target) {
             }}
             />
 
-            {/* spotlight  */}
-            <motion.div
-            key="spotlight"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-                position: "fixed",
-                inset: 0,
-                pointerEvents: "none",
-                zIndex: 9999,
-                background: "rgba(0,0,0,0.8)",     // << IMPORTANT (you did not have this)
-                WebkitMask: targetRect
-                ? `radial-gradient(
-                    circle ${Math.max(targetRect.width, targetRect.height) * 0.7}px
-                    at ${targetRect.left + targetRect.width / 2}px
-                    ${targetRect.top + targetRect.height / 2}px,
-                    transparent 0%,
-                    black 100%
-                    )`
-                : "",
-                mask: targetRect
-                ? `radial-gradient(
-                    circle ${Math.max(targetRect.width, targetRect.height) * 0.7}px
-                    at ${targetRect.left + targetRect.width / 2}px
-                    ${targetRect.top + targetRect.height / 2}px,
-                    transparent 0%,
-                    black 100%
-                    )`
-                : "",
-            }}
-            />
-
 
             {/* Tooltip */}
             <motion.div
