@@ -42,33 +42,23 @@ export function createWidget(config: initOnboard) {
       root = createRoot(container);
     }
 
-  let lastIndex = -1;
+    const onChange = async (i: number) => {
+      currentIndex = i;
+      saveState();
 
-const onChange = async (i: number) => {
-  if (i === lastIndex) return;
-  lastIndex = i;
-
-  currentIndex = i;
-  saveState();
-
-  steps = steps.map((step, idx) =>
-    idx === currentIndex
-      ? { ...step, step_viewed: step.step_viewed + 1 }
-      : step
+    steps = steps.map((step, idx) =>
+    idx === currentIndex ? { ...step, step_viewed: (step.step_viewed) + 1 } : step
   );
-
-  try {
-    const res = await updateTour({
-      steps,
-      tourId: config.tourId,
-      key: config.secret_key
-    });
-
-    steps = res || steps;
-  } catch (error) {
-    console.log(error);
-  }
-};
+  
+      try {
+        const res = await updateTour({steps, tourId: config.tourId, key: config.secret_key});
+        console.log('triggered', res);
+        steps = res || steps;
+        
+      } catch(error) {
+        console.log(error);
+      }
+    }
 
     root?.render(
       <OnboardingWidget
