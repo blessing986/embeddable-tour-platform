@@ -141,6 +141,8 @@ export const Tooltip = ({
     const tooltipEl = tooltipRef.current;
     if (!el || !tooltipEl) return;
 
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+
     // remove highlight from previous target
     if (prevTargetRef.current && prevTargetRef.current !== el) {
       prevTargetRef.current.style.position = "";
@@ -168,7 +170,7 @@ export const Tooltip = ({
     window.addEventListener("scroll", updatePosition);
     window.addEventListener("resize", updatePosition);
 
-    // cleanup when tooltip unmounts
+    // cleanup fxn
     return () => {
       window.removeEventListener("scroll", updatePosition);
       window.removeEventListener("resize", updatePosition);
