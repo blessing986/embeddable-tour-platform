@@ -120,7 +120,7 @@ if (step.target) {
                 : {}),
             }}
             >
-            {step.title && <h4 style={{ marginBottom: 8 }}>{step.title}</h4>}
+            {step.title && <h4 style={{ marginBottom: 8 , fontWeight: 800}}>{step.title}</h4>}
             <div className="content">{step.content}</div>
 
             <div style={mergedStyles.progress} className="progress">
