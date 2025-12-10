@@ -127,6 +127,7 @@ export const Tooltip = ({
   styles?: TooltipStyles;
 }) => {
   const tooltipRef = useRef<HTMLDivElement>(null);
+  const prevTargetRef = useRef<HTMLElement | null>(null);
 
   const mergedStyles = {
     tooltip: { ...defaultTooltipStyles.tooltip, ...styles?.tooltip },
@@ -140,15 +141,24 @@ export const Tooltip = ({
     const tooltipEl = tooltipRef.current;
     if (!el || !tooltipEl) return;
 
-    const rect = el.getBoundingClientRect();
+    // remove highlight from previous target
+    if (prevTargetRef.current && prevTargetRef.current !== el) {
+      prevTargetRef.current.style.position = "";
+      prevTargetRef.current.style.zIndex = "";
+      prevTargetRef.current.style.boxShadow = "";
+      prevTargetRef.current.style.borderRadius = "";
+    }
 
-    // highlight target
+    // highlight current target
     el.style.position = "relative";
-    el.style.zIndex = "9998";
+    el.style.zIndex = "1002";
     el.style.boxShadow = "0 0 0 4px rgba(255,255,255,0.9)";
     el.style.borderRadius = "8px";
 
+    prevTargetRef.current = el;
+
     // position tooltip
+    const rect = el.getBoundingClientRect();
     tooltipEl.style.left = `${rect.left + rect.width / 2 + window.scrollX}px`;
     tooltipEl.style.top = `${rect.bottom + 12 + window.scrollY}px`;
   };
@@ -157,9 +167,19 @@ export const Tooltip = ({
     updatePosition();
     window.addEventListener("scroll", updatePosition);
     window.addEventListener("resize", updatePosition);
+
+    // cleanup when tooltip unmounts
     return () => {
       window.removeEventListener("scroll", updatePosition);
       window.removeEventListener("resize", updatePosition);
+
+      if (prevTargetRef.current) {
+        prevTargetRef.current.style.position = "";
+        prevTargetRef.current.style.zIndex = "";
+        prevTargetRef.current.style.boxShadow = "";
+        prevTargetRef.current.style.borderRadius = "";
+        prevTargetRef.current = null;
+      }
     };
   }, [step.target]);
 
