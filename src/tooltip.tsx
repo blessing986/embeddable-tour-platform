@@ -26,18 +26,21 @@ export const Tooltip = ({
     progress: { ...defaultTooltipStyles.progress, ...styles?.progress },
   };
 
-  let targetRect: DOMRect | null = null;
-let tooltipPosition: React.CSSProperties = {};
+    let targetRect: DOMRect | null = null;
+    let tooltipPosition: React.CSSProperties = {};
 
 if (step.target) {
-  const el = document.querySelector(step.target);
+  const el = document.querySelector(step.target) as HTMLElement;
   if (el) {
     el.scrollIntoView({ behavior: "smooth", block: "center" });
-
     targetRect = el.getBoundingClientRect();
+    el.style.position = "relative";
+      el.style.zIndex = "1001";
+      el.style.boxShadow = "0 0 0 4px rgba(255,255,255,0.9)"; 
+      el.style.borderRadius = "8px";
 
     tooltipPosition = {
-      position: "absolute",
+      position: "sticky",
       left: `${targetRect.left + targetRect.width / 2}px`,
       top: `${targetRect.bottom + 12 + window.scrollY}px`, 
       transform: "translateX(-50%)", 
@@ -64,7 +67,6 @@ if (step.target) {
                 zIndex: 9998,
             }}
             />
-
 
             {/* Tooltip */}
             <motion.div
