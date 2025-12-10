@@ -8,7 +8,7 @@ function App() {
 
     const widget = initOnboard({ 
       tourId: 1, 
-      userId: "56462647-1e02-454e-8927-40d45ceda06a",
+      secret_key: "56462647-1e02-454e-8927-40d45ceda06a",
       resume: true,
       styles: {
         tooltip: {
