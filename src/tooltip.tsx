@@ -64,7 +64,7 @@ if (step.target) {
                 zIndex: 9998,
             }}
             />
-            
+
             {/* spotlight  */}
             <motion.div
             key="spotlight"
@@ -76,7 +76,8 @@ if (step.target) {
                 position: "fixed",
                 inset: 0,
                 pointerEvents: "none",
-                zIndex: 9999, // higher than dark overlay but lower than tooltip
+                zIndex: 9999,
+                background: "rgba(0,0,0,0.8)",     // << IMPORTANT (you did not have this)
                 WebkitMask: targetRect
                 ? `radial-gradient(
                     circle ${Math.max(targetRect.width, targetRect.height) * 0.7}px
@@ -98,6 +99,7 @@ if (step.target) {
             }}
             />
 
+
             {/* Tooltip */}
             <motion.div
             key={step.id}
@@ -118,7 +120,7 @@ if (step.target) {
                 : {}),
             }}
             >
-            {step.title && <h4 style={{ marginBottom: 8 }}>{step.title}</h4>}
+            {step.title && <h4 style={{ marginBottom: 8 , fontWeight: 800}}>{step.title}</h4>}
             <div className="content">{step.content}</div>
 
             <div style={mergedStyles.progress} className="progress">
