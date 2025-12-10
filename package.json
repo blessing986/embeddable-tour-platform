@@ -1,7 +1,7 @@
 {
   "name": "embeddable-tour-platform",
   "description": "A lightweight onboarding widget with animations and analytics",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "types": "dist/types/index.d.ts",
   "main": "dist/onboard.iife.js",
   "module": "dist/onboard.es.js",
