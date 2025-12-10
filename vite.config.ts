@@ -9,7 +9,9 @@ export default defineConfig({
     tsconfigPaths(),
     dts({ insertTypesEntry: true }),
   ],
-
+ define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  },
   build: {
     lib: {
       entry: "src/widget-entry.ts",
