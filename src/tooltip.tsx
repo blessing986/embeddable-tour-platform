@@ -1,4 +1,5 @@
-import { AnimatePresence, motion } from "framer-motion"; // make sure it's framer-motion
+import React from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { defaultTooltipStyles } from "./constant";
 import type { Step, TooltipStyles } from "./types";
 

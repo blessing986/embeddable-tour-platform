@@ -1,29 +1,33 @@
 import { defineConfig } from 'vite'
-import tsconfigPaths from "vite-tsconfig-paths";
+import react from '@vitejs/plugin-react'
+import tsconfigPaths from "vite-tsconfig-paths"
+import dts from "vite-plugin-dts"
 
 export default defineConfig({
   plugins: [
-    tsconfigPaths()
+    react(),                     // ← REQUIRED!
+    tsconfigPaths(),
+    dts({ insertTypesEntry: true }),
   ],
-  define: {
-    'process.env.NODE_ENV': JSON.stringify('production'),
-    'process.env': {} // optional fallback
-  },
+
   build: {
     lib: {
       entry: "src/widget-entry.ts",
       name: "OnboardWidget",
       fileName: (format) => `onboard.${format}.js`,
-      formats: ["iife"]
+      formats: ["es", "iife"],
     },
-     rollupOptions: {
+    rollupOptions: {
+      external: [
+        "react",
+        "react-dom",
+      ],
       output: {
         globals: {
           react: "React",
-          "react-dom": "ReactDOM"
-        }
-      }
+          "react-dom": "ReactDOM",
+        },
+      },
     },
-    minify: "esbuild"
   },
 })

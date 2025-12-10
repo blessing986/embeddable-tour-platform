@@ -4,11 +4,12 @@
     target?: string;
     content: string;
     position?: "top"|"bottom"|"left"|"right"|"center";
+    step_viewed: number;
     };
 
     export type OnboardConfig = {
     steps: Step[];
-    tourId?: number;
+    tourId: number;
     secret_key: string;
     resume?: boolean;
     onEvent?: (evt: any) => void;
@@ -17,7 +18,7 @@
     };
 
     export type initOnboard = {
-    tourId?: number;
+    tourId: number;
     secret_key: string;
     resume?: boolean;
     onEvent?: (evt: any) => void;

@@ -1,6 +1,6 @@
 import { createRoot, type Root } from "react-dom/client";
 import OnboardingWidget from "./OnboardingWidget";
-import { fetchTour } from "./api";
+import { fetchTour, updateTour } from "./api";
 import type { initOnboard, Tour } from "./types";
 
 export function createWidget(config: initOnboard) {
@@ -16,12 +16,10 @@ export function createWidget(config: initOnboard) {
       return;
     }
 
-    // fetch the tour data once
     const tour = await fetchTour({ tourId: config.tourId, userId: config.secret_key });
     if (!tour) return;
     steps = tour.steps;
 
-    // restore previous index if resume is enabled
     if (config.resume !== false) {
       try {
         const saved = localStorage.getItem(storeKey);
@@ -44,12 +42,30 @@ export function createWidget(config: initOnboard) {
       root = createRoot(container);
     }
 
+    const onChange = async (i: number) => {
+      currentIndex = i;
+      saveState();
+
+    steps = steps.map((step, idx) =>
+    idx === currentIndex ? { ...step, step_viewed: (step.step_viewed) + 1 } : step
+  );
+  
+      try {
+        const res = await updateTour({steps, tourId: config.tourId, key: config.secret_key});
+        console.log('triggered', res);
+        
+      } catch(error) {
+        console.log(error);
+        
+      }
+    }
+
     root?.render(
       <OnboardingWidget
         steps={steps}
         startIndex={currentIndex}
         fireEvent={fire}
-        onChange={(i) => { currentIndex = i; saveState(); }}
+        onChange={onChange}
         onEnd={destroy}
         styles={config.styles}
       />
@@ -86,7 +102,6 @@ export function createWidget(config: initOnboard) {
       extra: extra || {},
     };
     config.onEvent?.(payload);
-    console.log("Onboard event:", payload);
   }
 
   return { start, goTo, destroy, config };
