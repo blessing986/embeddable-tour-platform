@@ -1,33 +1,51 @@
 {
   "name": "embeddable-tour-platform",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "description": "A lightweight onboarding widget with animations and analytics",
+  "version": "1.0.2",
+  "types": "dist/types/index.d.ts",
+  "main": "dist/onboard.iife.js",
+  "module": "dist/onboard.es.js",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/onboard.es.js"
+      },
+      "require": {
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/onboard.iife.js"
+      }
+    }
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "build:js": "vite build",
+    "build:types": "tsc --project tsconfig.lib.json",
+    "build": "npm run build:types && npm run build:js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.87.1",
     "motion": "^12.23.25",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
+  "peerDependencies": {
+  "react": "^19.2.1",
+  "react-dom": "^19.2.1"
+},
   "devDependencies": {
+     "@types/node": "^20",
+   "@types/react": "^19",
+    "@types/react-dom": "^19",
+ "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+  "typescript": "~5.9.3",
+  "vite": "^7.2.4",
+  "@vitejs/plugin-react": "^5.1.1",
     "@eslint/js": "^9.39.1",
-    "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
-    "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite-plugin-dts": "^4.5.4"
   }
 }

@@ -9,8 +9,8 @@
 
     export type OnboardConfig = {
     steps: Step[];
-    tourId?: number;
-    userId: string;
+    tourId: number;
+    secret_key: string;
     resume?: boolean;
     onEvent?: (evt: any) => void;
     analyticsEndpoint?: string;
@@ -18,8 +18,8 @@
     };
 
     export type initOnboard = {
-    tourId?: number;
-    userId: string;
+    tourId: number;
+    secret_key: string;
     resume?: boolean;
     onEvent?: (evt: any) => void;
     analyticsEndpoint?: string;

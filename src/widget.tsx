@@ -8,15 +8,15 @@ export function createWidget(config: initOnboard) {
   let container: HTMLDivElement | null = null;
   let steps: Tour['steps'] = [];
   let currentIndex = 0;
-  const storeKey = `onboard:${config.tourId}${config.userId}:state`;
+  const storeKey = `onboard:${config.tourId}${config.secret_key}:state`;
 
   async function start() {
-    if (!config.tourId || !config.userId) {
+    if (!config.tourId || !config.secret_key) {
       console.error("tourId and userId are required");
       return;
     }
 
-    const tour = await fetchTour({ tourId: config.tourId, userId: config.userId });
+    const tour = await fetchTour({ tourId: config.tourId, userId: config.secret_key });
     if (!tour) return;
     steps = tour.steps;
 
@@ -42,12 +42,30 @@ export function createWidget(config: initOnboard) {
       root = createRoot(container);
     }
 
+    const onChange = async (i: number) => {
+      currentIndex = i;
+      saveState();
+
+    const updatedSteps = steps.map((step, idx) => 
+    idx === currentIndex ? { ...step, step_viewed: (step.step_viewed) + 1 } : step
+  );
+  
+      try {
+        const res = await updateTour({steps: updatedSteps, tourId: config.tourId, key: config.secret_key});
+        console.log('triggered', res);
+        
+      } catch(error) {
+        console.log(error);
+        
+      }
+    }
+
     root?.render(
       <OnboardingWidget
         steps={steps}
         startIndex={currentIndex}
         fireEvent={fire}
-        onChange={(i) => { currentIndex = i; saveState(); }}
+        onChange={onChange}
         onEnd={destroy}
         styles={config.styles}
       />
@@ -84,21 +102,6 @@ export function createWidget(config: initOnboard) {
       extra: extra || {},
     };
     config.onEvent?.(payload);
-    console.log("Onboard event:", payload);
-
-     const updatedSteps = steps.map((step, idx) => 
-    idx === currentIndex ? { ...step, step_viewed: (step.step_viewed || 0) + 1 } : step
-  );
-  console.log(updatedSteps, 'updatedSteps');
-  
-      try {
-        const res = updateTour({steps: updatedSteps, tourId: config.tourId || 0, key: config.userId});
-        console.log('triggered', res);
-        
-      } catch(error) {
-        console.log(error);
-        
-      }
   }
 
   return { start, goTo, destroy, config };
