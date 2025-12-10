@@ -3,20 +3,20 @@ import type { Step } from "./types";
 
  type Tour = {
     id: number;
-    user_id: string;
+   secret_key: string;
     name: string;
     description: string;
     steps: Step[];
     created_at: string;
 }
 
-export const fetchTour = async ({tourId, userId}: {tourId: number, userId: string}) => {
+export const fetchTour = async ({tourId, userId}: {tourId: number, secret_key: string}) => {
   try {
     const { data, error } = await supabase
       .from("Tours")
       .select("*")
       .eq("id", tourId)
-      .eq("user_id", userId)
+      .eq("user_id", secret_key)
       .single(); // ensures only one result
     
     if (error) {
