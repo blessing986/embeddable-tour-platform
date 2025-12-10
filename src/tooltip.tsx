@@ -144,7 +144,7 @@ export const Tooltip = ({
 
     // highlight target
     el.style.position = "relative";
-    el.style.zIndex = "1001";
+    el.style.zIndex = "9998";
     el.style.boxShadow = "0 0 0 4px rgba(255,255,255,0.9)";
     el.style.borderRadius = "8px";
 
@@ -180,7 +180,7 @@ export const Tooltip = ({
             width: "100vw",
             height: "100vh",
             background: "rgba(0,0,0,0.8)",
-            zIndex: 9998,
+            zIndex: 1001,
           }}
         />
 
@@ -197,7 +197,7 @@ export const Tooltip = ({
             ...mergedStyles.tooltip,
             position: "absolute",
             transform: "translateX(-50%)",
-            zIndex: 1002,
+            zIndex: 2002,
           }}
         >
           {step.title && (
