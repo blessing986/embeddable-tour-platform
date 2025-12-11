@@ -209,43 +209,51 @@ export const Tooltip = ({
         <motion.div
           ref={tooltipRef}
           key={step.id}
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          initial={{ opacity: 0, y: 15, scale: 0.95 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="onboard-tooltip tooltip show"
+          exit={{ opacity: 0, y: 15, scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 300, damping: 22 }}
           style={{
             ...mergedStyles.tooltip,
             position: "absolute",
             transform: "translateX(-50%)",
             zIndex: 2002,
+            borderRadius: "12px",
+            padding: "16px 20px 20px",
+            boxShadow: "0 8px 22px rgba(0,0,0,0.15)",
           }}
         >
-             <button
-          onClick={onSkip}
-          style={{
-            position: "absolute",
-            top: "8px",
-            right: "8px",
-            width: "28px",
-            height: "28px",
-            borderRadius: "50%",
-            background: "#ffffff",
-            border: "1px solid rgba(0,0,0,0.1)",
-            fontSize: "16px",
-            fontWeight: "600",
-            lineHeight: "0",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-            zIndex: 10,
-            transition: "transform 0.15s ease",
-          }}
-        >
-          x
-        </button>
+          {/* Close (skip) button */}
+          <button
+            onClick={onSkip}
+            aria-label="Skip tour"
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "10px",
+              width: "28px",
+              height: "28px",
+              borderRadius: "50%",
+              background: "white",
+              border: "1px solid rgba(0,0,0,0.1)",
+              fontSize: "16px",
+              fontWeight: "700",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+              transition: "all 0.15s ease",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.transform = "scale(1.08)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.transform = "scale(1)")
+            }
+          >
+            ×
+          </button>
           {step.title && (
             <h4 style={{ marginBottom: 8, fontWeight: 800 }}>{step.title}</h4>
           )}
