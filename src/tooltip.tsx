@@ -227,10 +227,8 @@ export const Tooltip = ({
             zIndex: 10,
             transition: "transform 0.15s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         >
-          ×
+          x
         </button>
         {/* Tooltip */}
         <motion.div
