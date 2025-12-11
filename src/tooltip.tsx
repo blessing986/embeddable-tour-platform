@@ -205,7 +205,33 @@ export const Tooltip = ({
             zIndex: 1001,
           }}
         />
-
+          <button
+          onClick={onSkip}
+          style={{
+            position: "absolute",
+            top: "8px",
+            right: "8px",
+            width: "28px",
+            height: "28px",
+            borderRadius: "50%",
+            background: "#ffffff",
+            border: "1px solid rgba(0,0,0,0.1)",
+            fontSize: "16px",
+            fontWeight: "600",
+            lineHeight: "0",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+            zIndex: 10,
+            transition: "transform 0.15s ease",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        >
+          ×
+        </button>
         {/* Tooltip */}
         <motion.div
           ref={tooltipRef}
@@ -237,9 +263,6 @@ export const Tooltip = ({
             </button>
             <button style={mergedStyles.button} onClick={onNext}>
               {index + 1 === total ? "Finish" : "Next"}
-            </button>
-            <button style={mergedStyles.button} onClick={onSkip}>
-              Skip
             </button>
           </div>
         </motion.div>
