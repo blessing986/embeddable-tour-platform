@@ -49,7 +49,7 @@ steps,
       }}
       onSkip={() => {
         fireEvent("skipped");
-        setStep(0);
+        onEnd();
       }}
       styles={styles}
     />
