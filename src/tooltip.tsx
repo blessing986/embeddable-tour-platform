@@ -205,7 +205,23 @@ export const Tooltip = ({
             zIndex: 1001,
           }}
         />
-          <button
+        {/* Tooltip */}
+        <motion.div
+          ref={tooltipRef}
+          key={step.id}
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="onboard-tooltip tooltip show"
+          style={{
+            ...mergedStyles.tooltip,
+            position: "absolute",
+            transform: "translateX(-50%)",
+            zIndex: 2002,
+          }}
+        >
+             <button
           onClick={onSkip}
           style={{
             position: "absolute",
@@ -227,27 +243,9 @@ export const Tooltip = ({
             zIndex: 10,
             transition: "transform 0.15s ease",
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
         >
-          ×
+          x
         </button>
-        {/* Tooltip */}
-        <motion.div
-          ref={tooltipRef}
-          key={step.id}
-          initial={{ opacity: 0, y: 20, scale: 0.95 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 20, scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="onboard-tooltip tooltip show"
-          style={{
-            ...mergedStyles.tooltip,
-            position: "absolute",
-            transform: "translateX(-50%)",
-            zIndex: 2002,
-          }}
-        >
           {step.title && (
             <h4 style={{ marginBottom: 8, fontWeight: 800 }}>{step.title}</h4>
           )}
